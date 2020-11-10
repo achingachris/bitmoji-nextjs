@@ -1,3 +1,0 @@
-# SHOPPR.
-
-The Shoppr.
