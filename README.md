@@ -1,0 +1,1 @@
+installnpm install tailwindcss@latest postcss@latest autoprefixer@latest
