@@ -4,17 +4,24 @@ const ImageUploadForm = () => {
   // upload image to API
   const [image, setImage] = useState(null)
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0]
-    console.log(file)
-    setImage(file)
+  const handleImageUpload = async (e) => {
+    // get file from event
+    const setImage = e.target.files[0]
+
+    console.log(setImage);
+    // send image to API
+    const sendImage = await fetch('https://public-api.mirror-ai.net/v2/generate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Mirror-AI-Token': 'f63272366f3b4d56915b620101a7a2e7',
+      },
+      body: JSON.stringify(setImage)
+    })
   }
 
   const submitImage = async () => {
-    const newImage = {
-      
-    }
-
+  
     const result = await fetch('https://public-api.mirror-ai.net/v2/generate', {
       method: 'POST',
       headers: {
