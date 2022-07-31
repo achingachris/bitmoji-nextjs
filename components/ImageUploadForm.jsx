@@ -1,4 +1,7 @@
+import axios from "axios";
 import { useState, useEffect } from 'react'
+
+const baseURL = 'https://public-api.mirror-ai.net/v2/generate'
 
 const ImageUploadForm = () => {
   // upload image to API
@@ -27,7 +30,7 @@ const ImageUploadForm = () => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(myData)
+      body: myData
     })
 
     const resultInJson = await result.json()

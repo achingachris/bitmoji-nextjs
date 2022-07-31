@@ -10,6 +10,7 @@
   },
   "proxy": "https://public-api.mirror-ai.net/v2/generate",
   "dependencies": {
+    "axios": "^0.27.2",
     "bootstrap": "^5.2.0-beta1",
     "cors": "^2.8.5",
     "next": "12.2.2",
