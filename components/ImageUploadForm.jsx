@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios'
 import { useState, useEffect } from 'react'
 
 const baseURL = 'https://public-api.mirror-ai.net/v2/generate'
@@ -7,39 +7,44 @@ const ImageUploadForm = () => {
   // upload image to API
   const [image, setImage] = useState(null)
 
-  const handleImageUpload = async (e) => {
+  const handleImageUpload = (e) => {
     // get file from event
-    const setImage = e.target.files[0]
+    setImage(e.target.files[0])
+  }
 
-    console.log(setImage);
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    console.log(setImage)
+    const formData = new FormData()
+    formData.append('image', setImage)
+
     // send image to API
-    const sendImage = await fetch('https://public-api.mirror-ai.net/v2/generate', {
+    fetch('/api/mirror', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Mirror-AI-Token': 'f63272366f3b4d56915b620101a7a2e7',
-      },
-      body: JSON.stringify(setImage)
+
+      body: formData,
     })
+      .then((res) => console.log(res.json()))
+      .catch((err) => console.log(err))
   }
 
-  const submitImage = async () => {
-  
-    const result = await fetch('https://public-api.mirror-ai.net/v2/generate', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: myData
-    })
+  // const submitImage = async () => {
+  //   const result = await fetch('https://public-api.mirror-ai.net/v2/generate', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: myData,
+  //   })
 
-    const resultInJson = await result.json()
-    setAuthors(prev => [...prev, resultInJson])
-  }
+  //   const resultInJson = await result.json()
+  //   setAuthors((prev) => [...prev, resultInJson])
+  // }
 
   return (
     <div>
-      <form className='form form-control'>
+      <form className='form form-control' onSubmit={handleSubmit}>
         <div className='m-4'>
           <label htmlFor='formFileLg' className='form-label'>
             Upload Your Photo
@@ -49,6 +54,7 @@ const ImageUploadForm = () => {
             type='file'
             onChange={handleImageUpload}
           />
+          <button type='submit'>Submit</button>
         </div>
       </form>
     </div>
