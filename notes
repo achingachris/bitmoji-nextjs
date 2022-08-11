@@ -1,0 +1,5 @@
+start nextjs application:
+
+npx create-next-app@latest bitmex-app --use-npm
+
+
